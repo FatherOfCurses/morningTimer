@@ -1,4 +1,5 @@
 import React from "react";
+import "./TimeForm.css";
 
 class TimeForm extends React.Component {
   constructor(props) {
@@ -20,17 +21,21 @@ class TimeForm extends React.Component {
 
   render() {
     return (
-      <div id="form">
+      <div id="form" className="body">
         <form onSubmit={this.handleSubmit}>
-          <label>
-            Target Time:
-            <input
-              type="text"
-              value={this.state.value}
-              onChange={this.handleChange}
-            />
-          </label>
-          <input type="submit" value="Go!" />
+          <div class="formGroup">
+            <label for="targettime">
+              Target Time:
+              <input
+                type="text"
+                className="input"
+                id="targettime"
+                value={this.state.value}
+                onChange={this.handleChange}
+              />
+            </label>
+            <input type="submit" value="Go!" />
+          </div>
         </form>
       </div>
     );
