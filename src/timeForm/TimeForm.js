@@ -1,28 +1,42 @@
 import React from "react";
 import "./TimeForm.css";
 import Clock from "react-live-clock";
+import Moment from "moment";
+import Alert from "react-bootstrap/Alert";
 
 class TimeForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      startTime: Clock.toString,
+      startTime: "",
       targetTime: "",
-      timeDifference: "45 minutes"
+      timeDifference: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.getTimeDifference = this.getTimeDifference.bind(this);
   }
 
   handleChange(event) {
-    this.setState({ value: event.target.value });
+    this.setState({ targetTime: event.target.value });
   }
 
   handleSubmit(event) {
-    alert("Target time set to " + this.state.value);
     event.preventDefault();
+    alert("Target time set to " + this.state.targetTime);
   }
+
+  getTimeDifference() {
+    // parse time using 24-hour clock and use UTC to prevent DST issues
+    var start = Moment.now();
+    var end = Moment(this.state.targetTime, "HH:mm");
+    this.setState({
+      timeDifference: Moment.duration(end.diff(start)).toString()
+    });
+    this.startTime = start.toString;
+  }
+
   // TODO: apply CSS to this section
   render() {
     return (
@@ -32,26 +46,22 @@ class TimeForm extends React.Component {
           <p>Current Time</p>
           <Clock />
           <p>Target Time</p>
-          <p>{this.state.value}</p>
-          <div class="formGroup">
-            <label for="targettime">
+          <p>{this.state.targetTime}</p>
+          <div className="formGroup">
+            <label htmlFor="targettime">
               Target Time:
               <input
-                type="text"
+                type="time"
                 className="input"
                 id="targettime"
-                value={this.state.value}
+                value={this.state.targetTime}
                 onChange={this.handleChange}
               />
             </label>
             {
               // TODO: add handling to prevent target time from being before start time
             }
-            <input
-              type="submit"
-              value="Go!"
-              onClick={() => (this.state.startTime = Clock.value())}
-            />
+            <input type="submit" value="Go!" onClick={this.getTimeDifference} />
           </div>
           <p>Time Difference</p>
           <p>{this.state.timeDifference}</p>
@@ -61,4 +71,4 @@ class TimeForm extends React.Component {
   }
 }
 
-export default TimeForm;
+export default  TimeForm;
