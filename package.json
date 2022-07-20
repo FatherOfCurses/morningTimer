@@ -7,7 +7,7 @@
     "@bit/digiaonline.react-foundation.internal.utils": "^0.9.6",
     "@bit/digiaonline.react-foundation.progress-bar": "^0.9.6",
     "bootstrap": "^4.3.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "react": "^16.8.6",
     "react-bootstrap": "^1.3.0",
     "react-dom": "^16.8.6",
